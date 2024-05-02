@@ -1,30 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>jsPDF Example</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Sheikh Mansur</title>
 </head>
 <body>
-  <script>
-    // Путь к PDF-файлу
-    const pdfUrl = './CV_sheikh-mansour.pdf';
-
-    // Загрузка и чтение PDF-файла
-    fetch(pdfUrl)
-      .then(response => response.blob())
-      .then(blob => {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-          const arrayBuffer = reader.result;
-          const pdf = new jsPDF();
-          pdf.text(arrayBuffer);
-          pdf.save('example.pdf');
-        };
-        reader.readAsArrayBuffer(blob);
-      })
-      .catch(error => console.error('Ошибка при загрузке PDF:', error));
-  </script>
+    <embed src="./CV_sheikh-mansour.pdf" type="application/pdf" width="100%" height="600px" />
 </body>
 </html>
