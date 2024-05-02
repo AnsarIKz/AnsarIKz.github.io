@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Sheikh Mansur</title>
@@ -11,9 +12,36 @@
             margin: 0;
             
         }
+        #pdf-viewer {
+            width: 100%;
+            height: 600px; /* Установите желаемую высоту */
+        }
     </style>
 </head>
 <body>
      <iframe src="https://docs.google.com/viewer?url=https://github.com/AnsarIKz/AnsarIKz.github.io/raw/main/CV_sheikh-mansour.pdf&embedded=true" style="width:100%; height:100%;" frameborder="0"></iframe>
+    <div id="pdf-viewer"></div>
+    <script>
+        // Загрузка и отображение PDF файла
+        pdfjsLib.getDocument('https://github.com/AnsarIKz/AnsarIKz.github.io/raw/main/CV_sheikh-mansour.pdf').promise.then(pdf => {
+            // Выбор страницы для отображения (например, первая страница)
+            pdf.getPage(1).then(page => {
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                document.getElementById('pdf-viewer').appendChild(canvas);
+
+                page.render(renderContext);
+            });
+        });
+    </script>
 </body>
 </html>
