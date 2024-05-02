@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- PDF.js main library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-
-<!-- Worker script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.4/pdfobject.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Sheikh Mansur</title>
@@ -22,38 +17,15 @@
 
     <script>
         // Функция для загрузки и отображения PDF файла
-        function renderPDF(url, canvasContainer) {
-            // Загружаем PDF файл
-            pdfjsLib.getDocument(url).promise.then(function(pdf) {
-                // Загружаем первую страницу
-                pdf.getPage(1).then(function(page) {
-                    var scale = 1.5;
-                    var viewport = page.getViewport({ scale: scale });
-
-                    // Создаем canvas элемент для отображения страницы PDF
-                    var canvas = document.createElement("canvas");
-                    var context = canvas.getContext("2d");
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-
-                    // Добавляем canvas элемент в контейнер для отображения PDF
-                    canvasContainer.appendChild(canvas);
-
-                    // Рендерим страницу на canvas
-                    var renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    page.render(renderContext);
-                });
-            });
+        function renderPDF(url, elementId) {
+            PDFObject.embed(url, `#${elementId}`);
         }
 
         // Вызываем функцию renderPDF при загрузке страницы
         window.onload = function() {
-            var url = "./CV_sheikh-mansour.pdf";
-            var canvasContainer = document.getElementById("pdf-viewer");
-            renderPDF(url, canvasContainer);
+            var url = "https://github.com/AnsarIKz/AnsarIKz.github.io/raw/main/CV_sheikh-mansour.pdf";
+            var elementId = "pdf-viewer";
+            renderPDF(url, elementId);
         };
     </script>
 </body>
